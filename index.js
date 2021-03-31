@@ -1,10 +1,10 @@
+if (process.env.NODE_ENV !== 'Production') require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 
-require('dotenv').config()
+const config = require('./config')
 
 const app = express()
-const PORT = process.env.PORT || 4000
 
 // Routes
 const task = require('./components/task/network')
@@ -15,6 +15,6 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/task', task)
 
-app.listen(PORT, () => {
-    console.log('Running on port', PORT)
+app.listen(config.api.port, () => {
+    console.log('Running on port', config.api.port)
 })
